@@ -2,8 +2,6 @@ class Board
   WIDTH = 3
   HEIGHT = WIDTH
 
-  attr_accessor :grid
-
   def initialize
     @grid = Array.new(HEIGHT) { Array.new(WIDTH, :" ") }
   end
@@ -19,7 +17,7 @@ class Board
   end
 
   def winner? marker
-    row_win? marker || column_win? marker || diagonal_win? marker
+    row_win?(marker) || column_win?(marker) || diagonal_win?(marker)
   end
 
   def row_win? marker
@@ -52,7 +50,7 @@ class Board
   end
 
   def []=(y, x, something)
-    if @grid[y][x] != :" "
+    if @grid[y][x] == :" "
       @grid[y][x] = something
     else
       return false
@@ -60,21 +58,21 @@ class Board
   end
 end
 
-def print_and_check
-  @b.print_grid
-  puts "Row with all Os?: #{@b.row_win? :O}"
-  puts "Row with all Xs?: #{@b.row_win? :X}"
-  puts "Column with all Os?: #{@b.column_win? :O}"
-  puts "Column with all Xs?: #{@b.column_win? :X}"
-  puts "Diagonal with all Os?: #{@b.diagonal_win? :O}"
-  puts "Diagonal with all Xs?: #{@b.diagonal_win? :X}"
-end
+# def print_and_check
+#   @b.print_grid
+#   puts "Row with all Os?: #{@b.row_win? :O}"
+#   puts "Row with all Xs?: #{@b.row_win? :X}"
+#   puts "Column with all Os?: #{@b.column_win? :O}"
+#   puts "Column with all Xs?: #{@b.column_win? :X}"
+#   puts "Diagonal with all Os?: #{@b.diagonal_win? :O}"
+#   puts "Diagonal with all Xs?: #{@b.diagonal_win? :X}"
+# end
 
-@b = Board.new
-print_and_check
-@b[0, 0] = :O
-print_and_check
-@b[1, 1] = :O
-print_and_check
-@b[1, 0] = :O
-print_and_check
+# @b = Board.new
+# print_and_check
+# @b[0, 0] = :O
+# print_and_check
+# @b[1, 1] = :O
+# print_and_check
+# @b[1, 0] = :O
+# print_and_check
