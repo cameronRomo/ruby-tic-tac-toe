@@ -18,10 +18,10 @@ class Board
     puts
   end
 
-  def row_win
+  def row_win? marker
     @grid.any? do |row|
       row.all? do |cell|
-        cell == :X
+        cell == marker
       end
     end
   end
@@ -37,14 +37,15 @@ end
 
 def print_and_check
   @b.print_grid
-  p @b.row_win  
+  p @b.row_win? :O
+  p @b.row_win? :X
 end
 
 @b = Board.new
 print_and_check
-@b.grid[0][0] = :X
+@b.grid[0][0] = :O
 print_and_check
-@b.grid[0][1] = :X
+@b.grid[0][1] = :O
 print_and_check
-@b.grid[0][2] = :X
+@b.grid[0][2] = :O
 print_and_check
