@@ -17,9 +17,34 @@ class Board
     end
     puts
   end
+
+  def row_win
+    @grid.any? do |row|
+      row.all? do |cell|
+        cell == :X
+      end
+    end
+  end
+
+  def column_win
+
+  end
+
+  def diaganal_win
+
+  end
 end
 
-b = Board.new
-b.print_grid
-b.grid[0][1] = :"x"
-b.print_grid
+def print_and_check
+  @b.print_grid
+  p @b.row_win  
+end
+
+@b = Board.new
+print_and_check
+@b.grid[0][0] = :X
+print_and_check
+@b.grid[0][1] = :X
+print_and_check
+@b.grid[0][2] = :X
+print_and_check
