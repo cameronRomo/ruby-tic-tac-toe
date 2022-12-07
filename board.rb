@@ -35,14 +35,12 @@ class Board
   end
 
   def diagonal_win? marker
-    return true if (0...WIDTH).all? do |i|
-      @grid[i][i] == marker
+    [-1, 1].any? do |sign|
+      (0...WIDTH).all? do |i|
+        second_index = sign > 0 ? i : sign * (i + 1)
+        @grid[i][second_index] == marker
+      end
     end
-
-    return true if (0...WIDTH).all? do |i|
-      @grid[i][WIDTH - 1 - i] == marker
-    end
-    false
   end
 end
 
