@@ -34,8 +34,15 @@ class Board
     end
   end
 
-  def diaganal_win?
+  def diagonal_win? marker
+    return true if (0...WIDTH).all? do |i|
+      @grid[i][i] == marker
+    end
 
+    return true if (0...WIDTH).all? do |i|
+      @grid[i][WIDTH - 1 - i] == marker
+    end
+    false
   end
 end
 
@@ -45,13 +52,15 @@ def print_and_check
   puts "Row with all Xs?: #{@b.row_win? :X}"
   puts "Column with all Os?: #{@b.column_win? :O}"
   puts "Column with all Xs?: #{@b.column_win? :X}"
+  puts "Diagonal with all Os?: #{@b.diagonal_win? :O}"
+  puts "Diagonal with all Xs?: #{@b.diagonal_win? :X}"
 end
 
 @b = Board.new
 print_and_check
+@b.grid[2][0] = :O
+print_and_check
+@b.grid[1][1] = :O
+print_and_check
 @b.grid[0][2] = :O
-print_and_check
-@b.grid[1][2] = :O
-print_and_check
-@b.grid[2][2] = :O
 print_and_check
