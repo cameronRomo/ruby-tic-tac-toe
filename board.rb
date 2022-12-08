@@ -6,12 +6,45 @@ class Board
     @grid = Array.new(HEIGHT) { Array.new(WIDTH, :" ") }
   end
 
-  def display
-    @grid.reduce("\n") { |output, row| output << format_row(row) } << "\n"
-  end
-
+  
   def winner? marker
     row_win?(marker) || column_win?(marker) || diagonal_win?(marker)
+  end
+  
+  def [] y, x
+    @grid[y][x]
+  end
+  
+  def []=(y, x, something)
+    if @grid[y][x] == :" "
+      @grid[y][x] = something
+    else
+      return false
+    end
+  end
+  
+  def display
+    output = "\n"
+    # TODO: Append header
+      # 1 2 3
+    output << generate_header
+    # TODO: Generate grid with letter for each row
+    output << genereate_grid
+  end
+  
+  private
+  def format_row row
+    row.reduce("    ") { |row_string, cell| row_string << "[#{cell}]" } << "\n"
+  end
+  
+  def genereate_grid
+    @grid.reduce("") { |output, row| output << format_row(row) } << "\n"
+  end
+
+  def generate_header
+    (1..WIDTH).reduce("   ") do |header, row_number|
+      header << "  #{row_number}"
+    end << "\n"
   end
 
   def row_win? marker
@@ -37,23 +70,6 @@ class Board
         @grid[i][second_index] == marker
       end
     end
-  end
-
-  def [] y, x
-    @grid[y][x]
-  end
-
-  def []=(y, x, something)
-    if @grid[y][x] == :" "
-      @grid[y][x] = something
-    else
-      return false
-    end
-  end
-
-  private
-  def format_row row
-    row.reduce("") { |row_string, cell| row_string << "[#{cell}]" } << "\n"
   end
 end
 
