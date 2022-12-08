@@ -7,15 +7,7 @@ class Board
   end
 
   def display
-    output = [""]
-    @grid.each do |row|
-      row_string = ""
-      row.each do |cell|
-        row_string << "[#{cell}]"
-      end
-      output << row_string
-    end
-    output << ""
+    @grid.reduce("\n") { |output, row| output << format_row(row) } << "\n"
   end
 
   def winner? marker
@@ -57,6 +49,11 @@ class Board
     else
       return false
     end
+  end
+
+  private
+  def format_row row
+    row.reduce("") { |row_string, cell| row_string << "[#{cell}]" } << "\n"
   end
 end
 

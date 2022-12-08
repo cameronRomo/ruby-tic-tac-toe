@@ -6,8 +6,6 @@ class Game
     @board = Board.new
   end
 
-
-
   def play_turn player
     move = player.get_move    
     @board[*move]=(player.marker)
