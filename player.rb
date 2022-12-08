@@ -1,4 +1,5 @@
 class Player
+  ROW_MAP = (:A..:C).zip(0..2).to_h
 
   attr_reader :marker
 
@@ -11,12 +12,19 @@ class Player
   def get_move
     [get_row, get_col]
   end
-
+  
   def get_row
-    gets.to_i
+    choice_prompt "row"    
+    ROW_MAP[gets[0].upcase.to_sym]
+  end
+  
+  def get_col
+    choice_prompt "column"
+    gets.to_i - 1
   end
 
-  def get_col
-    gets.to_i
+  def choice_prompt string
+    puts "Pick a #{string}"
+    print "> "
   end
 end
