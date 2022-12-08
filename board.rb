@@ -25,8 +25,6 @@ class Board
   
   def display
     output = "\n"
-    # TODO: Append header
-      # 1 2 3
     output << generate_header
     # TODO: Generate grid with letter for each row
     output << genereate_grid
@@ -42,9 +40,7 @@ class Board
   end
 
   def generate_header
-    (1..WIDTH).reduce("   ") do |header, row_number|
-      header << "  #{row_number}"
-    end << "\n"
+    (1..WIDTH).reduce("   ") { |header, row_number| header << "  #{row_number}" } << "\n"
   end
 
   def row_win? marker
