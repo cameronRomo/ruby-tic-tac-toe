@@ -27,16 +27,21 @@ class Board
     output = "\n"
     output << generate_header
     # TODO: Generate grid with letter for each row
-    output << genereate_grid
+    output << genereate_rows
   end
   
   private
-  def format_row row
-    row.reduce("    ") { |row_string, cell| row_string << "[#{cell}]" } << "\n"
+  def format_row row, letter
+    row.reduce("  #{letter} ") { |string, cell| string << "[#{cell}]" } << "\n"
   end
   
-  def genereate_grid
-    @grid.reduce("") { |output, row| output << format_row(row) } << "\n"
+  def genereate_rows
+    letter = "@"
+
+    @grid.reduce("") do |output, row| 
+      letter = letter.next
+      output << format_row(row, letter)
+    end
   end
 
   def generate_header
