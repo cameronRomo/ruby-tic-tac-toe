@@ -6,14 +6,16 @@ class Board
     @grid = Array.new(HEIGHT) { Array.new(WIDTH, :" ") }
   end
 
-  def print_grid
+  def display
+    output = [""]
     @grid.each do |row|
-      puts
+      row_string = ""
       row.each do |cell|
-        print "[#{cell}]"
+        row_string << "[#{cell}]"
       end
+      output << row_string
     end
-    puts
+    output << ""
   end
 
   def winner? marker
@@ -59,7 +61,7 @@ class Board
 end
 
 # def print_and_check
-#   @b.print_grid
+#   @b.display
 #   puts "Row with all Os?: #{@b.row_win? :O}"
 #   puts "Row with all Xs?: #{@b.row_win? :X}"
 #   puts "Column with all Os?: #{@b.column_win? :O}"
