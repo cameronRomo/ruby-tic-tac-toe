@@ -16,7 +16,7 @@ class Board
   end
   
   def []=(y, x, marker)
-    if @grid[y][x] == :" " && [:X, :O].include? marker
+    if @grid[y][x] == :" " && [:X, :O].include?(marker)
       @grid[y][x] = marker
     else
       false

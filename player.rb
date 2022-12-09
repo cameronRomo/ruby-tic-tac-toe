@@ -14,17 +14,39 @@ class Player
   end
   
   def get_row
-    choice_prompt "row"    
-    ROW_MAP[gets[0].upcase.to_sym]
+    loop do
+      choice_prompt "row"
+      input = gets
+      choice = translate_row(input)
+      return choice if valid? choice
+      puts "Invalid row."
+    end
   end
   
-  def get_col
-    choice_prompt "column"
-    gets.to_i - 1
+  def translate_row input
+    ROW_MAP[input[0].upcase.to_sym]
   end
 
+  def get_col
+    loop do
+      choice_prompt "column"
+      input = gets
+      choice = translate_col(input)
+      return choice if valid? choice
+      puts "Invalid column."
+    end
+  end
+
+  def translate_col input
+    choice = input.to_i - 1
+  end
+  
   def choice_prompt string
     puts "Pick a #{string}"
     print "> "
+  end
+
+  def valid? choice
+    (0..2).include? choice
   end
 end

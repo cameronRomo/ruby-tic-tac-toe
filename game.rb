@@ -7,7 +7,7 @@ class Game
   end
 
   def play_turn player
-    move = player.get_move    
+    move = player.get_move
     @board[*move]=(player.marker)
     p @board.winner? player.marker
   end
