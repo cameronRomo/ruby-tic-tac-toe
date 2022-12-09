@@ -15,11 +15,11 @@ class Board
     @grid[y][x]
   end
   
-  def []=(y, x, something)
-    if @grid[y][x] == :" "
-      @grid[y][x] = something
+  def []=(y, x, marker)
+    if @grid[y][x] == :" " && [:X, :O].include? marker
+      @grid[y][x] = marker
     else
-      return false
+      false
     end
   end
   
