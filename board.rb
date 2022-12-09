@@ -5,7 +5,6 @@ class Board
   def initialize
     @grid = Array.new(HEIGHT) { Array.new(WIDTH, :" ") }
   end
-
   
   def winner? marker
     row_win?(marker) || column_win?(marker) || diagonal_win?(marker)
