@@ -6,8 +6,8 @@ class Board
     @grid = Array.new(HEIGHT) { Array.new(WIDTH, :" ") }
   end
   
-  def winner? marker
-    row_win?(marker) || column_win?(marker) || diagonal_win?(marker)
+  def winner? player
+    row_win?(player.marker) || column_win?(player.marker) || diagonal_win?(player.marker)
   end
   
   def [] y, x
