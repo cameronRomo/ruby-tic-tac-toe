@@ -1,5 +1,9 @@
 class Player
   ROW_MAP = (:A..:C).zip(0..2).to_h
+  TRANSLATIONS = {
+    row: ->(input) { ROW_MAP[input[0].upcase.to_sym] },
+    column: ->(input) { input.to_i - 1 }
+  }
 
   attr_reader :marker
 
@@ -10,37 +14,24 @@ class Player
   end
 
   def get_move
-    [get_row, get_col]
-  end
-  
-  def get_row
-    loop do
-      choice_prompt "row"
-      input = gets
-      choice = translate_row(input)
-      return choice if valid? choice
-      puts "Invalid row."
-    end
-  end
-  
-  def translate_row input
-    ROW_MAP[input[0].upcase.to_sym]
+    [get_coordinate(:row), get_coordinate(:column)]
   end
 
-  def get_col
+  def prompt_choice string
+    puts "Pick a #{string}"
+    print "> "
+  end
+
+  def get_coordinate row_or_column
     loop do
-      choice_prompt "column"
+      prompt_choice row_or_column
       input = gets
-      choice = translate_col(input)
+      choice = TRANSLATIONS[row_or_column].call(input)
       return choice if valid? choice
-      puts "Invalid column."
+      puts "Invalid #{row_or_column}."
     end
   end
 
-  def translate_col input
-    choice = input.to_i - 1
-  end
-  
   def choice_prompt string
     puts "Pick a #{string}"
     print "> "
