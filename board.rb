@@ -25,7 +25,6 @@ class Board
   def display
     output = "\n"
     output << generate_header
-    # TODO: Generate grid with letter for each row
     output << genereate_rows
   end
   
