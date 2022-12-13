@@ -5,7 +5,7 @@ class Player
     column: ->(input) { input.to_i - 1 }
   }
 
-  attr_reader :marker, :name
+  attr_reader :marker, :name, :score
 
   def initialize name, marker
     @name = name
@@ -17,6 +17,10 @@ class Player
     TRANSLATIONS.map do |row_or_column, translator|
       get_coordinate row_or_column, translator
     end
+  end
+
+  def increment_score
+    @score += 1
   end
 
   private
