@@ -9,17 +9,18 @@ class Board
   def winner? player
     row_win?(player.marker) || column_win?(player.marker) || diagonal_win?(player.marker)
   end
-  
-  def [] y, x
-    @grid[y][x]
+
+  def spaces_left?
+    @grid.any? do |row|
+      row.any? do |cell|
+        cell == :" "
+      end
+    end
   end
   
-  def []=(y, x, marker)
-    if @grid[y][x] == :" " && [:X, :O].include?(marker)
-      @grid[y][x] = marker
-    else
-      false
-    end
+  def place_marker(coordinates, marker)
+    y, x = coordinates
+    @grid[y][x] == :" " && @grid[y][x] = marker
   end
   
   def display
