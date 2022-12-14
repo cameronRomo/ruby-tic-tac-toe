@@ -1,4 +1,8 @@
+require_relative 'input_helper'
+
 class Player
+  include InputHelper
+
   ROW_MAP = (:A..:C).zip(0..2).to_h
   TRANSLATIONS = {
     row: ->(input) { ROW_MAP[input[0].upcase.to_sym] },
@@ -24,23 +28,15 @@ class Player
   end
 
   private
-  def prompt_choice row_or_column
-    print "Pick a #{row_or_column}\n>"
-  end
 
   def get_coordinate row_or_column, translator
     loop do
-      print prompt_choice row_or_column
+      prompt "Pick a #{row_or_column} :"
       input = gets
       choice = translator.call(input)
       return choice if valid? choice
       puts "Invalid #{row_or_column}."
     end
-  end
-
-  def choice_prompt string
-    puts "Pick a #{string}"
-    print "> "
   end
 
   def valid? choice
