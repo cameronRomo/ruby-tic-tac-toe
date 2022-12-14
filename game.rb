@@ -13,7 +13,7 @@ class Game
 
   def start_game
     puts "Starting a new game..."
-    puts "#{@players.first} goes first this game."
+    puts "#{@players.first.name} goes first this game."
     play_loop
     puts @board.display
     puts announce_winner
