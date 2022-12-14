@@ -8,17 +8,23 @@ class Game
   def initialize players
     @players = players
     @board = Board.new
-    play_until_win
+    start_game
   end
 
-  def play_until_win
+  def start_game
+    puts "Starting a new game..."
+    puts "#{@players.first} goes first this game."
+    play_loop
+    puts @board.display
+    puts announce_winner
+  end
+
+  def play_loop
     current_player, other_player = @players
     until @winner || !@board.spaces_left? do
       play_turn(current_player)
       current_player, other_player = other_player, current_player
     end
-    puts @board.display
-    @winner
   end
   
   def play_turn(player)
@@ -30,5 +36,9 @@ class Game
       puts "Invalid move."
     end
     @winner = player if @board.winner? player
+  end
+
+  def announce_winner
+    @winner ? "#{@winner.name} won!!" : "The game was a tie!"
   end
 end

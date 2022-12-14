@@ -25,7 +25,7 @@ class Player
 
   private
   def prompt_choice row_or_column
-    puts "Pick a #{row_or_column}\n>"
+    print "Pick a #{row_or_column}\n>"
   end
 
   def get_coordinate row_or_column, translator
